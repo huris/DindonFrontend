@@ -105,7 +105,7 @@
             changeOrderState() {
                 this.$axios({
                     method: 'put',
-                    url: 'http://geeking.tech:8000/orders/' + this.orderDetail.order_id + '/process/',
+                    url: '/orders/' + this.orderDetail.order_id + '/process/',
                     headers: {
                         "Authorization": "Bearer " + localStorage.getItem('user_token')
                     },
@@ -115,8 +115,6 @@
                     }
                 })
                     .then(response => {
-                        // eslint-disable-next-line no-console
-                        //console.log(response);
                         this.noUse = response;
                         this.$dialog.alert({
                             message:'订单确认成功！'
@@ -124,8 +122,6 @@
                         this.$router.push({name:'order'});
                     })
                     .catch(error => {
-                        // eslint-disable-next-line no-console
-                        //console.log(error);
                         this.noUse = error;
                         this.$dialog.alert({
                             message: '出现错误'
@@ -135,7 +131,7 @@
             deleteOrder(){
                 this.$axios({
                     method: 'put',
-                    url: 'http://geeking.tech:8000/orders/' + this.orderDetail.order_id + '/process/',
+                    url: '/orders/' + this.orderDetail.order_id + '/process/',
                     headers: {
                         "Authorization": "Bearer " + localStorage.getItem('user_token')
                     },
@@ -145,8 +141,6 @@
                     }
                 })
                     .then(response => {
-                        // eslint-disable-next-line no-console
-                        //console.log(response);
                         this.noUse = response;
                         this.$dialog.alert({
                             message:'订单取消成功！'
@@ -154,8 +148,6 @@
                         this.$router.push({name:'order'});
                     })
                     .catch(error => {
-                        // eslint-disable-next-line no-console
-                        //console.log(error);
                         if(error.response.status === 400) {
                             this.$dialog.alert({
                                 message: '此订单正在处理中，用户无法取消，如果想要取消，请联系商家！'

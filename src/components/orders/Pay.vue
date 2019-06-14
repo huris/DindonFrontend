@@ -55,8 +55,6 @@
                     }
                 })
                     .then(data => {
-                        // eslint-disable-next-line no-console
-                        //console.log(data);
                         this.noUse = data;
                         this.$dialog.alert({
                             message: '支付成功！'
@@ -64,8 +62,6 @@
                         this.$router.push({name: 'order'});
                     })
                     .catch(error => {
-                        // eslint-disable-next-line no-console
-                        //console.log(error);
                         this.noUse = error;
                         this.$dialog.alert({
                             message: '出现错误！'

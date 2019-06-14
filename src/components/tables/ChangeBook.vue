@@ -117,7 +117,7 @@
                 } else {
                     this.$axios({
                         method: 'put',
-                        url: 'http://geeking.tech:8000/tables/books/' + this.recordId + '/update',
+                        url: '/tables/books/' + this.recordId + '/update',
                         headers: {
                             "Authorization": "Bearer " + localStorage.getItem('user_token')
                         },
@@ -128,14 +128,10 @@
                         }
                     })
                         .then(data => {
-                            // eslint-disable-next-line no-console
-                            //console.log(data);
                             this.noUse = data;
                             this.$router.push({name: 'table'});
                         })
                         .catch(error => {
-                            // eslint-disable-next-line no-console
-                            console.log(error);
                             this.noUse = error;
                             this.$dialog.alert({
                                 message: '出现错误，请重试！'
@@ -153,8 +149,6 @@
             getNowChoose(picker) {
                 this.nowChoose = '';
                 this.isChange = true;
-                // eslint-disable-next-line no-console
-                //console.log(picker.getValues())
                 let value = picker.getValues();
                 this.nowChoose += value[0];
                 for (let i = 1; i < value.length; i++)

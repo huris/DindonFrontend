@@ -98,22 +98,18 @@
                 bookCount: 0,
                 totalData: null,
                 cellDirection: [],
-                host: this.$store.state.host
+                noUse:null
             }
         },
         created() {
-            // eslint-disable-next-line no-console
-            //console.log(1);
             this.$axios({
                 method: 'get',
-                url: 'http://geeking.tech:8000' + "/tables/users",
+                url: '/tables/users',
                 headers: {
                     Authorization: "Bearer " + localStorage.getItem('user_token')
                 }
             })
                 .then(response => {
-                    // eslint-disable-next-line no-console
-                    console.log(response);
                     this.totalData = response.data;
                     this.tableList = this.totalData.results;
                     this.bookCount = this.totalData.count;
@@ -123,7 +119,6 @@
                         this.cellDirection[i] = 0;
                 })
                 .catch(error => {
-                    // eslint-disable-next-line no-console
                     if (error.response.status === 401) {
                         this.$dialog.alert({
                             message: '登录已失效，请重新登录'
@@ -169,12 +164,9 @@
                     message: '确定删除预订记录？'
                 })
                     .then(response => {
-                        // eslint-disable-next-line no-console
-                        console.log(response);
-                        // eslint-disable-next-line no-console
-                        console.log(222);
+                        this.noUse = response;
                         this.$axios({
-                            url: 'http://geeking.tech:8000/tables/books/' + index + '/destroy',
+                            url: '/tables/books/' + index + '/destroy',
                             headers: {
                                 "Authorization": "Bearer " + localStorage.getItem('user_token')
                             },
@@ -184,31 +176,23 @@
                             }
                         })
                             .then(response => {
-                                // eslint-disable-next-line no-console
-                                console.log(response);
+                                this.noUse = response;
                                 this.$dialog.alert({
                                     message: '删除成功！'
                                 });
                                 location.reload();
                             })
                             .catch(error => {
-                                // eslint-disable-next-line no-console
-                                console.log(error);
                                 if (error.response.status === 401) {
                                     this.$dialog.alert({
                                         message: '登录已失效，请重新登录！'
                                     })
                                         .then(data => {
-                                            // eslint-disable-next-line no-console
-                                            console.log(data);
+                                            this.noUse = data;
                                             this.$router.push({name: 'login'})
                                         })
                                 }
                             })
-                    })
-                    .catch(error => {
-                        // eslint-disable-next-line no-console
-                        console.log(error);
                     });
             }
         }

@@ -49,9 +49,7 @@
                 this.direction[i] = 0;
             this.userName = localStorage.getItem('user_name');
             if(this.userName === '')
-                this.userName = '未登录'
-            // eslint-disable-next-line no-console
-            //console.log(this.direction);
+                this.userName = '未登录';
         },
         methods: {
             changeDir(index) {

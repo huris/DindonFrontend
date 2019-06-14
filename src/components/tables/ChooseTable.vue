@@ -75,7 +75,7 @@
         },
         created() {
             this.$axios({
-                url: 'http://geeking.tech:8000'+'/tables/',
+                url: '/tables/',
                 method:'get'
             })
                 .then(response => {
@@ -121,14 +121,10 @@
                 this.$router.push({name: 'booktable', params: {id: index}});
             },
             changeDirection(index) {
-                // eslint-disable-next-line no-console
-                //console.log(this.cellDirection[index]);
                 if (this.cellDirection[index] === 0)
                     this.$set(this.cellDirection, index, 1);
                 else
                     this.$set(this.cellDirection, index, 0);
-                // eslint-disable-next-line no-console
-                //console.log(this.cellDirection[index]);
             },
             getTime(index) {
                 if (index === 1)

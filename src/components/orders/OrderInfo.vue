@@ -140,10 +140,7 @@
                 this.payStyle = Number(localStorage.getItem('payStyle'));
             }
             for(let i in this.dishList){
-                // eslint-disable-next-line no-console
                 if(this.temp[this.dishList[i].dish_id] > 0){
-                    // eslint-disable-next-line no-console
-                    //console.log(i.dish_id,this.temp[i.dish_id]);
                     this.order_detail.push({dish_id:this.dishList[i].dish_id,dish_num:this.temp[this.dishList[i].dish_id]});
                 }
             }
@@ -202,7 +199,7 @@
             confirmPay() {
                 this.$axios({
                     method: 'post',
-                    url: 'http://geeking.tech:8000/orders/create',
+                    url: '/orders/create',
                     headers: {
                         Authorization: "Bearer " + localStorage.getItem('user_token')
                     },
@@ -218,7 +215,12 @@
                 })
                     .then(response => {
                         this.clearInfo(1);
-                        localStorage.setItem('payUrl',response.data.pay_url);
+                        let len = response.data.pay_url.length;
+                        // eslint-disable-next-line no-console
+                        console.log(len);
+                        // eslint-disable-next-line no-console
+                        console.log(response.data.pay_url.substring(25,len));
+                        localStorage.setItem('payUrl','http://geeking.tech:8008'+response.data.pay_url.substring(25,len));
                         this.$router.push({name: 'confirmPay'});
                     })
                     .catch(error => {
@@ -253,6 +255,7 @@
                     localStorage.removeItem('payStyle');
                     localStorage.removeItem('message');
                     localStorage.removeItem('dishNumValue');
+                    localStorage.removeItem('tableId');
                 }
             }
         },

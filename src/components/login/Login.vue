@@ -169,7 +169,7 @@
                         message: '手机号不合法！'
                     })
                 } else {
-                    this.$axios.post('http://geeking.tech:8000' + '/users/code/', {
+                    this.$axios.post('/users/code/', {
                         "phone_number": this.phoneNumber,
                         "purpose": 1
                     })
@@ -223,7 +223,7 @@
                     })
                 } else {
                     if (this.isPasswordLogin) {
-                        this.$axios.post('http://geeking.tech:8000/users/login/password/', {
+                        this.$axios.post('/users/login/password/', {
                             phone_number: this.phoneNumber,
                             password: this.password
                         })
@@ -236,8 +236,6 @@
                                 this.$router.push({name: 'announcement'});
                             })
                             .catch(response => {
-                                // eslint-disable-next-line no-console
-                                //console.log(response);
                                 if (response.response.status === 401) {
                                     this.$dialog.alert({
                                         message: '密码错误！'
@@ -245,7 +243,7 @@
                                 }
                             })
                     } else {
-                        this.$axios.post('http://geeking.tech:8000/users/login/code/', {
+                        this.$axios.post('/users/login/code/', {
                             phone_number: this.phoneNumber,
                             code: this.checkCode
                         })
@@ -258,8 +256,6 @@
                                 this.$router.push({name: 'announcement'});
                             })
                             .catch(error => {
-                                // eslint-disable-next-line no-console
-                                //console.log(error);
                                 if (error.response.status === 400) {
                                     this.$dialog.alert({
                                         message: '验证码码错误！'

@@ -119,8 +119,6 @@
         },
         methods: {
             onClickLeft() {
-                // eslint-disable-next-line no-console
-                //console.log('gg');
                 this.$router.push({name: 'choosetable'});
             },
             bookTable() {
@@ -135,7 +133,7 @@
                 } else {
                     this.$axios({
                         method: 'post',
-                        url: 'http://geeking.tech:8000/tables/books',
+                        url: '/tables/books',
                         headers: {
                             "Authorization": "Bearer " + localStorage.getItem('user_token')
                         },
@@ -146,15 +144,11 @@
                         }
                     })
                         .then(data => {
-                            // eslint-disable-next-line no-console
-                            //console.log(data);
                             this.noUse = data;
                             this.clearInfo();
                             this.$router.push({name: 'table'});
                         })
                         .catch(error => {
-                            // eslint-disable-next-line no-console
-                            //console.log(error);
                             this.noUse = error;
                             if(error.response.status === 401) {
                                 this.$dialog.alert({
@@ -199,12 +193,8 @@
                 }
                 localStorage.setItem('bookDate', this.bookDate);
                 this.show = false;
-                // eslint-disable-next-line no-console
-                //console.log(this.bookDate);
             },
             changeRadio(index) {
-                // eslint-disable-next-line no-console
-                //console.log(index);
                 this.radio = index;
                 localStorage.setItem('radio', index);
             },

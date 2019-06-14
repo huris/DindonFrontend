@@ -29,6 +29,7 @@ Vue.config.productionTip = false;
 Vue.use(Vant);
 Vue.use(VueRouter);
 Vue.prototype.$axios = axios;
+axios.defaults.baseURL='http://geeking.tech:8008';
 
 const routes = [
     {path: '/', name: 'announcement', component: Announcement},
@@ -52,48 +53,6 @@ const router = new VueRouter({
     routes,
     mode: "history"// (缩写) 相当于 routes: routes
 });
-
-// router.beforeEach((to, from, next) => {
-//     // ...
-//     var token = localStorage.getItem("currentUser_token");
-//     // eslint-disable-next-line no-console
-//     //console.log(token,to.name);
-//     if (to.name === 'login' || to.name === 'register' || to.name === 'announcement' || to.name === 'dish') {
-//         next();
-//     } else {
-//         if (token === '') {
-//             next('/login');
-//         }
-//         else {
-//             next();
-//         }
-//     }
-//     next();
-// });
-
-// http request 拦截器
-// axios.interceptors.request.use(
-//     config => {
-//         return config;
-//     },
-//     error => {
-//         localStorage.setItem("currentUser_token",'');
-//         // this.$store.state.userPhoneNumber = '未登录';
-//         this.$router.push({name:'login'});
-//         return Promise.reject(error);
-//     });
-
-// http response 拦截器
-// axios.interceptors.response.use(
-//     response => {
-//         return response;
-//     },
-//     error => {
-//         localStorage.setItem("currentUser_token",'');
-//         // this.$store.state.userPhoneNumber = '未登录';
-//         this.$router.push({name:'login'});
-//         return Promise.reject(error.response.data)   // 返回接口返回的错误信息
-//     });
 
 new Vue({
     store: store,

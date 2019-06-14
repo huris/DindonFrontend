@@ -125,13 +125,12 @@
                         message: '新密码长度不能少于6位！'
                     })
                 } else {
-                    this.$axios.post('http://geeking.tech:8000/users/code/', {
+                    this.$axios.post('/users/code/', {
                         "phone_number": localStorage.getItem('user_name'),
                         "purpose": 2
                     })
                         .then(data => {
-                            // eslint-disable-next-line no-console
-                            console.log(data);
+                            this.noUse = data;
                             const TIME_COUNT = 60;
                             if (!this.timer) {
                                 this.checkcodeTime = TIME_COUNT;
@@ -154,7 +153,7 @@
             },
             modifyPassword() {
                 this.$axios({
-                    url: 'http://geeking.tech:8000/users/changepassword/' + localStorage.getItem('uid') + '/',
+                    url: '/users/changepassword/' + localStorage.getItem('uid') + '/',
                     method: "put",
                     headers: {
                         "Authorization": "Bearer " + localStorage.getItem('user_token')
@@ -166,8 +165,6 @@
                     }
                 })
                     .then(response => {
-                        // eslint-disable-next-line no-console
-                        //console.log(response);
                         this.noUse = response;
                         this.$dialog.alert({
                             message: '修改成功！'
@@ -178,9 +175,6 @@
                         this.$router.push({name: 'user'});
                     })
                     .catch(error => {
-                        // eslint-disable-next-line no-console
-                        //console.log(error);
-                        //this.noUse = error;
                         if(error.response.status === 400) {
                             this.$dialog.alert({
                                 message: '原密码错误！'

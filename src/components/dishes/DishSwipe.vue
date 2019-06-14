@@ -20,18 +20,13 @@
         },
         created() {
             this.$axios({
-                url: 'http://geeking.tech:8000/announcements/',
+                url: '/announcements/',
                 method: 'get'
             })
                 .then(response => {
                     this.imges = response.data.results;
                 })
                 .catch(error => {
-                    // eslint-disable-next-line no-console
-                    //console.log(error.response.status);
-                    // eslint-disable-next-line no-console
-                    //console.log("aaa");
-                    this.noUse = error;
                     if(error.response.status === 503) {
                         this.$dialog.alert({
                             message: '当前服务不可得到！'
